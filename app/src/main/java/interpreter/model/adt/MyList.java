@@ -16,7 +16,7 @@ public class MyList<T> implements IList<T>{
     @Override
     public T get(int index) throws ADTException {
         if(index >= list.size() || index < 0){
-            throw new ADTException("Index out of bounds");
+            throw new ADTException("Index out of bounds.");
         }
         return list.get(index);
     }

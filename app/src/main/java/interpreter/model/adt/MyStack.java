@@ -14,7 +14,7 @@ public class MyStack<T> implements IStack<T> {
 
     @Override
     public T pop() throws ADTException {
-        if (stack.isEmpty()) throw new ADTException("pop from an empty stack");
+        if (stack.isEmpty()) throw new ADTException("Cannot pop from an empty stack.");
         return stack.pop();
     }
 

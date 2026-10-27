@@ -13,4 +13,6 @@ public record IntValue(int val) implements IValue {
     public String toString() {
         return Integer.toString(val);
     }
+
+    //equals + hashCode
 }

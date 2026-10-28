@@ -50,9 +50,9 @@ public class PrgState {
 
     @Override
     public String toString() {
-        return "\n\nExecution Stack:\n" + exeStack.toString() + "\n" +
+        return "\nExecution Stack:\n" + exeStack.toString() + "\n" +
                 "Symbol Table:\n" + symTable.toString() + "\n" +
-                "Output List:\n" + out.toString() + "\n\n";
+                "Output List:\n" + out.toString() + "\n";
     }
 }
 

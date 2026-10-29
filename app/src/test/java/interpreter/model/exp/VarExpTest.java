@@ -1,6 +1,6 @@
 package interpreter.model.exp;
 
-import interpreter.exceptions.ADTException;
+import interpreter.exceptions.ExpressionException;
 import interpreter.exceptions.MyException;
 import interpreter.model.adt.IDictionary;
 import interpreter.model.adt.MyDictionary;
@@ -20,11 +20,10 @@ class VarExpTest {
     }
 
     @Test
-    void evalThrowsADTExceptionWhenVariableNotDefined() {
+    void evalThrowsExpressionExceptionWhenVariableNotDefined() {
         VarExp exp = new VarExp("missingVar");
-
-        assertThrows(ADTException.class, () -> {
-            exp.eval(new MyDictionary<>());
-        });
+        var ex = assertThrows(ExpressionException.class,
+                () -> exp.eval(new MyDictionary<>()));
+        assertEquals("Variable missingVar is not defined.", ex.getMessage());
     }
 }

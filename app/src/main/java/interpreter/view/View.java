@@ -12,43 +12,20 @@ import interpreter.model.type.*;
 import interpreter.model.value.*;
 import interpreter.repository.IRepository;
 import interpreter.repository.Repository;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
-    private final IStmt ex1;
-    private final IStmt ex2;
-    private final IStmt ex3;
-
-    public View() {
-        this.ex1 = new CompStmt(new VarDeclStmt("v", new IntType()),
-                new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(2))),
-                        new PrintStmt(new VarExp("v"))));
-
-        this.ex2 = new CompStmt(new VarDeclStmt("a", new IntType()),
-                new CompStmt(new VarDeclStmt("b", new IntType()),
-                        new CompStmt(new AssignStmt("a", new ArithExp(ArithOp.ADD, new ValueExp(new IntValue(2)),
-                                new ArithExp(ArithOp.MUL, new ValueExp(new IntValue(3)), new ValueExp(new IntValue(5))))),
-                                new CompStmt(new AssignStmt("b", new ArithExp(ArithOp.ADD, new VarExp("a"), new ValueExp(new IntValue(1)))),
-                                        new PrintStmt(new VarExp("b"))))));
-
-        this.ex3 = new CompStmt(new VarDeclStmt("a", new BoolType()),
-                new CompStmt(new VarDeclStmt("v", new IntType()),
-                        new CompStmt(new AssignStmt("a", new ValueExp(new BoolValue(true))),
-                                new CompStmt(new IfStmt(new VarExp("a"),
-                                        new AssignStmt("v", new ValueExp(new IntValue(2))),
-                                        new AssignStmt("v", new ValueExp(new IntValue(3)))),
-                                        new PrintStmt(new VarExp("v"))))));
-    }
+    private static final List<IStmt> PROGRAMS = List.of(Examples.EX1, Examples.EX2, Examples.EX3);
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("- MENU -");
-            System.out.println("1. Example 1: " + ex1);
-            System.out.println("2. Example 2: " + ex2);
-            System.out.println("3. Example 3: " + ex3);
+            System.out.println("1. Example 1: " + PROGRAMS.get(0));
+            System.out.println("2. Example 2: " + PROGRAMS.get(1));
+            System.out.println("3. Example 3: " + PROGRAMS.get(2));
             System.out.println("0. Exit");
             System.out.print("Choose option: ");
 
@@ -57,11 +34,11 @@ public class View {
             if (option.equals("0")) {
                 break;
             } else if (option.equals("1")) {
-                runProgram(ex1);
+                runProgram(PROGRAMS.get(0));
             } else if (option.equals("2")) {
-                runProgram(ex2);
+                runProgram(PROGRAMS.get(1));
             } else if (option.equals("3")) {
-                runProgram(ex3);
+                runProgram(PROGRAMS.get(2));
             } else {
                 System.out.println("Invalid option.");
             }
@@ -73,7 +50,7 @@ public class View {
         try {
             PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), program);
             IRepository repo = new Repository(state);
-            Controller ctrl = new Controller(repo);
+            Controller ctrl = new Controller(repo, true);
 
             ctrl.allStep();
         } catch (MyException e) {

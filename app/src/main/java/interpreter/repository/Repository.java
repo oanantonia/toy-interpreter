@@ -11,11 +11,7 @@ public record Repository(IList<PrgState> states) implements IRepository {
         this.states.add(initialState);
     }
     @Override
-    public PrgState getCrtPrg() {
-        try {
-            return states.get(0);
-        } catch (ADTException e) {
-            return null;
-        }
+    public PrgState getCrtPrg() throws ADTException{
+        return states.get(0);
     }
 }

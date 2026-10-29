@@ -13,12 +13,12 @@ public record VarDeclStmt(String name, IType type) implements IStmt {
         IDictionary<String, IValue> symTable = state.getSymTable();
 
         if(symTable.isDefined(name)){
-            throw new StatementException("This variable was already declared");
+            throw new StatementException("Variable " + name + " was already declared.");
         }
 
         symTable.put(name, type.defaultValue());
 
-        return null;
+        return state;
     }
 
     @Override

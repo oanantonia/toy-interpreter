@@ -22,7 +22,7 @@ public record IfStmt(IExp cond, IStmt thenS, IStmt elseS) implements IStmt{
             state.getExeStack().push(elseS);
         }
 
-        return null;
+        return state;
     }
 
     @Override

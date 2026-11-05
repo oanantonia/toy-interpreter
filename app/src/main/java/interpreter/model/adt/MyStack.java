@@ -1,8 +1,8 @@
 package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
-import java.util.ArrayDeque;
-import java.util.Deque;
+
+import java.util.*;
 
 public class MyStack<T> implements IStack<T> {
     private final Deque<T> stack = new ArrayDeque<>();
@@ -26,6 +26,13 @@ public class MyStack<T> implements IStack<T> {
     @Override
     public String toString() {
         return stack.toString();
+    }
+
+    @Override
+    public List<T> toList(){
+        List<T> reversedList = new ArrayList<>(stack);
+        Collections.reverse(reversedList);
+        return reversedList;
     }
 }
 

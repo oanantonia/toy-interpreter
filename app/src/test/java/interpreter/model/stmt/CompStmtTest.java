@@ -19,7 +19,7 @@ class CompStmtTest {
     @BeforeEach
     void setUp() throws MyException {
         comp = new CompStmt(first, second);
-        state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), comp);
+        state = PrgState.of(comp);
         state.getExeStack().pop();
     }
 

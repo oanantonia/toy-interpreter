@@ -3,21 +3,32 @@ package interpreter.model;
 import interpreter.model.adt.*;
 import interpreter.model.stmt.IStmt;
 import interpreter.model.value.IValue;
+import interpreter.model.value.StringValue;
+
+import java.io.BufferedReader;
 
 
 public class PrgState {
     private IStack<IStmt> exeStack;
     private IDictionary<String, IValue> symTable;
     private IList<IValue> out;
+    private IDictionary<StringValue, BufferedReader> fileTable;
     private final IStmt originalProgram;
 
     public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable,
-                    IList<IValue> out, IStmt program) {
+                    IList<IValue> out, IDictionary<StringValue, BufferedReader> fileTable,
+                    IStmt program) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
+        this.fileTable = fileTable;
         this.originalProgram = program;
         exeStack.push(program);
+    }
+
+    public static PrgState of(IStmt program) {
+        return new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(),
+                new MyDictionary<>(), program);
     }
 
     public IStack<IStmt> getExeStack(){
@@ -30,6 +41,10 @@ public class PrgState {
 
     public IList<IValue> getOut(){
         return out;
+    }
+
+    public IDictionary<StringValue, BufferedReader> getFileTable(){
+        return fileTable;
     }
 
     public IStmt getOriginalProgram() {
@@ -48,11 +63,16 @@ public class PrgState {
         this.out = out;
     }
 
+    public void setFileTable(IDictionary<StringValue, BufferedReader> fileTable){
+        this.fileTable = fileTable;
+    }
+
     @Override
     public String toString() {
         return "\nExecution Stack:\n" + exeStack.toString() + "\n" +
                 "Symbol Table:\n" + symTable.toString() + "\n" +
-                "Output List:\n" + out.toString() + "\n";
+                "Output List:\n" + out.toString() + "\n" +
+                "File Table:\n" + fileTable.toString() + "\n";
     }
 }
 

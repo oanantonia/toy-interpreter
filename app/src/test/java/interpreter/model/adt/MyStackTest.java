@@ -3,6 +3,8 @@ package interpreter.model.adt;
 import interpreter.exceptions.ADTException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyStackTest {
@@ -30,5 +32,14 @@ public class MyStackTest {
         });
 
         assertEquals("Cannot pop from an empty stack.", exception.getMessage());
+    }
+
+    @Test
+    void toListReturnsTopOfStackFirst() {
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        assertEquals(List.of(3, 2, 1), stack.toList());
     }
 }

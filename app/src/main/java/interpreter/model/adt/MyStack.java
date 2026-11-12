@@ -30,9 +30,7 @@ public class MyStack<T> implements IStack<T> {
 
     @Override
     public List<T> toList(){
-        List<T> reversedList = new ArrayList<>(stack);
-        Collections.reverse(reversedList);
-        return reversedList;
+        return new ArrayList<>(stack); // ArrayDeque iterates from the top (head) down
     }
 }
 

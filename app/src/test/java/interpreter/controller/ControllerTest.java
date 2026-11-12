@@ -84,6 +84,14 @@ class ControllerTest {
     }
 
     @Test
+    void example5PrintsFive() throws MyException {
+        PrgState state = run(Examples.EX5);
+        assertTrue(state.getExeStack().isEmpty());
+        assertEquals(1, state.getOut().size());
+        assertEquals(new IntValue(5), state.getOut().get(0));
+    }
+
+    @Test
     void oneStepOnAnEmptyStackThrows() throws MyException {
         PrgState state = PrgState.of(new NopStmt());
         state.getExeStack().pop();

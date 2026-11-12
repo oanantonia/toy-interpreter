@@ -44,4 +44,12 @@ public final class Examples {
     }
 
     public static final IStmt EX4 = fileExample("test.in");
+
+    public static final IStmt EX5 = new CompStmt(new VarDeclStmt("a", new IntType()),
+            new CompStmt(new VarDeclStmt("b", new IntType()),
+                    new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(5))),
+                            new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(7))),
+                                    new IfStmt(new RelationalExp(RelOp.LT, new VarExp("a"), new VarExp("b")),
+                                            new PrintStmt(new VarExp("a")),
+                                            new PrintStmt(new VarExp("b")))))));
 }
